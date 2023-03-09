@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:qrcode_pay/widgets/theme.dart';
 
-class CardWahana extends StatelessWidget {
+class CardMakan extends StatelessWidget {
   final String name;
   final GestureTapCallback? onTap;
-  const CardWahana({
+  const CardMakan({
     Key? key,
     required this.name,
     this.onTap,
@@ -38,7 +38,7 @@ class CardWahana extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     image: const DecorationImage(
                       image: AssetImage(
-                        'assets/carousel.png',
+                        'assets/store.png',
                       ),
                       fit: BoxFit.cover,
                     ),
@@ -56,8 +56,8 @@ class CardWahana extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Rp 10.000',
-                        style: priceTextStyle,
+                        'Lorem Ipsum',
+                        style: blackTextStyle,
                       ),
                     ],
                   ),

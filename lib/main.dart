@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:qrcode_pay/pages/home/main_page.dart';
+import 'package:qrcode_pay/pages/home/outlet.dart';
+import 'package:qrcode_pay/pages/home/outlet/pilih_makan.dart';
+import 'package:qrcode_pay/pages/home/top_up.dart';
+import 'package:qrcode_pay/pages/home/topup/qr_top_up.dart';
+import 'package:qrcode_pay/pages/home/wahana.dart';
+import 'package:qrcode_pay/pages/home/wahana/jumlah_wahana.dart';
 import 'package:qrcode_pay/pages/sign_in.dart';
-import 'package:qrcode_pay/pages/test.dart';
+import 'package:qrcode_pay/providers/auth_provider.dart';
 
 void main() => runApp(const QrPay());
 
@@ -9,11 +17,23 @@ class QrPay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      routes: {
-        '/': (context) => const Test(),
-        '/sign_in': (context) => const SignIn(),
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AuthProvider()),
+      ],
+      child: MaterialApp(
+        routes: {
+          // '/': (context) => const Test(),
+          '/': (context) => const SignIn(),
+          '/main_page': (context) => const MainPage(),
+          '/top_up': (context) => const TopUp(),
+          '/outlet': (context) => const Outlet(),
+          '/wahana': (context) => const Wahana(),
+          '/qr_topup': (context) => const QrTopUp(),
+          '/jumlah_wahana': (context) => const JumlahWahana(),
+          '/pilih_makan': (context) => const PilihMakan(),
+        },
+      ),
     );
   }
 }
