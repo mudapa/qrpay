@@ -2,17 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qrcode_pay/models/data_model.dart';
 import 'package:qrcode_pay/providers/auth_provider.dart';
+import 'package:qrcode_pay/providers/outlet_provider.dart';
 import 'package:qrcode_pay/widgets/card/card_content.dart';
 import 'package:qrcode_pay/widgets/theme.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
 
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     // User authProvider
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     UserModel user = authProvider.user;
+
+    OutletProvider outletProvider = Provider.of<OutletProvider>(context);
+    outletIn() async {
+      bool success = await outletProvider.getOutlets();
+      print(success);
+      if (success) {
+        Navigator.pushNamed(context, '/outlet');
+      }
+    }
+
     Widget header() {
       return Container(
         margin: EdgeInsets.only(
@@ -27,7 +43,7 @@ class MainPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Hallo, ${user.id} ${user.name} ${user.email} ${user.message} ${user.token}',
+                    'Hallo, ${user.name}',
                     style: primaryTextStyle.copyWith(
                       fontSize: 24,
                       fontWeight: semibold,
@@ -61,33 +77,41 @@ class MainPage extends StatelessWidget {
               left: defaultMargin,
               right: defaultMargin,
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+            child: Column(
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    CardContent(
+                      text: 'Top Up',
+                      gambar: 'assets/button_add.png',
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/top_up');
+                      },
+                    ),
+                    CardContent(
+                      text: 'Outlet',
+                      gambar: 'assets/store.png',
+                      onPressed: outletIn,
+                    ),
+                    CardContent(
+                      text: 'Wahana',
+                      gambar: 'assets/carousel.png',
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/wahana');
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 50),
                 CardContent(
-                  text: 'Top Up',
+                  text: 'Test',
                   gambar: 'assets/button_add.png',
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/top_up');
-                  },
-                ),
-                CardContent(
-                  text: 'Outlet',
-                  gambar: 'assets/store.png',
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/outlet');
-                  },
-                ),
-                CardContent(
-                  text: 'Wahana',
-                  gambar: 'assets/carousel.png',
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/wahana');
-                  },
+                  onPressed: () {},
                 ),
               ],
             ),
-          )
+          ),
         ],
       );
     }

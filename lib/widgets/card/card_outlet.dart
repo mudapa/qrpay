@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:qrcode_pay/models/outlet_model.dart';
 import 'package:qrcode_pay/widgets/theme.dart';
 
 class CardOutlet extends StatelessWidget {
-  final String name;
-  final GestureTapCallback? onTap;
-  const CardOutlet({
-    Key? key,
-    required this.name,
-    this.onTap,
-  }) : super(key: key);
+  final OutletModel outlet;
+  CardOutlet(this.outlet);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {},
       child: Container(
         margin: EdgeInsets.only(
           top: defaultMargin,
@@ -50,13 +46,13 @@ class CardOutlet extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        name,
+                        outlet.name!,
                         style: primaryTextStyle.copyWith(
                           fontWeight: semibold,
                         ),
                       ),
                       Text(
-                        'Lorem Ipsum',
+                        outlet.address!,
                         style: blackTextStyle,
                       ),
                     ],

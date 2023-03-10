@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qrcode_pay/widgets/button/custom_button.dart';
 import 'package:qrcode_pay/widgets/card/card_content.dart';
-import 'package:qrcode_pay/widgets/card/card_outlet.dart';
 import 'package:qrcode_pay/widgets/card/card_top_up.dart';
 import 'package:qrcode_pay/widgets/card/card_wahana.dart';
 import 'package:qrcode_pay/widgets/textfield/custom_textfield.dart';
@@ -53,7 +52,6 @@ class Test extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-              const CardOutlet(name: 'Outlet A'),
               const CardWahana(name: 'Carousel A'),
               const CardTopUp(text: '5000'),
               CustomButton(
