@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qrcode_pay/models/data_model.dart';
 import 'package:qrcode_pay/providers/auth_provider.dart';
+import 'package:qrcode_pay/providers/balance_cek_provider.dart';
 import 'package:qrcode_pay/widgets/button/custom_button.dart';
 import 'package:qrcode_pay/widgets/textfield/custom_textfield.dart';
 import 'package:qrcode_pay/widgets/theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -19,6 +22,11 @@ class _SignInState extends State<SignIn> {
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
+    // CekBalance cekBalanceProvider
+    BalanceCekProvider balanceCekProvider =
+        Provider.of<BalanceCekProvider>(context);
+
+    // Auth Provider
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     handleSignIn() async {
       setState(() {
@@ -29,6 +37,9 @@ class _SignInState extends State<SignIn> {
         email: emailController.text,
         password: passwordController.text,
       )) {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('token', authProvider.user.token);
+        await balanceCekProvider.cekBalance();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             backgroundColor: secondColor,

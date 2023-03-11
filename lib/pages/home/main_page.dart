@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qrcode_pay/models/balance_cek_model.dart';
 import 'package:qrcode_pay/models/data_model.dart';
 import 'package:qrcode_pay/providers/auth_provider.dart';
+import 'package:qrcode_pay/providers/balance_cek_provider.dart';
 import 'package:qrcode_pay/providers/outlet_provider.dart';
 import 'package:qrcode_pay/widgets/card/card_content.dart';
 import 'package:qrcode_pay/widgets/theme.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -17,9 +20,15 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     // User authProvider
-    AuthProvider authProvider = Provider.of<AuthProvider>(context);
-    UserModel user = authProvider.user;
+    // AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    // UserModel user = authProvider.user;
 
+    // CekBalance cekBalanceProvider
+    BalanceCekProvider balanceCekProvider =
+        Provider.of<BalanceCekProvider>(context);
+    BalanceCekModel balanceCek = balanceCekProvider.balanceCek;
+
+    // Outlet outletProvider
     OutletProvider outletProvider = Provider.of<OutletProvider>(context);
     outletIn() async {
       bool success = await outletProvider.getOutlets();
@@ -43,7 +52,7 @@ class _MainPageState extends State<MainPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Hallo, ${user.name}',
+                    'Hallo',
                     style: primaryTextStyle.copyWith(
                       fontSize: 24,
                       fontWeight: semibold,
@@ -79,6 +88,24 @@ class _MainPageState extends State<MainPage> {
             ),
             child: Column(
               children: [
+                Container(
+                  margin: EdgeInsets.only(
+                    bottom: 64,
+                    left: defaultMargin,
+                    right: defaultMargin,
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Saldo Anda : Rp. ${balanceCek.balance}',
+                        style: primaryTextStyle.copyWith(
+                          fontSize: 24,
+                          fontWeight: semibold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -102,12 +129,6 @@ class _MainPageState extends State<MainPage> {
                       },
                     ),
                   ],
-                ),
-                const SizedBox(height: 50),
-                CardContent(
-                  text: 'Test',
-                  gambar: 'assets/button_add.png',
-                  onPressed: () {},
                 ),
               ],
             ),

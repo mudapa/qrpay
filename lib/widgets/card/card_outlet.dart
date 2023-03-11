@@ -4,7 +4,7 @@ import 'package:qrcode_pay/widgets/theme.dart';
 
 class CardOutlet extends StatelessWidget {
   final OutletModel outlet;
-  CardOutlet(this.outlet);
+  const CardOutlet(this.outlet, {super.key});
 
   @override
   Widget build(BuildContext context) {
