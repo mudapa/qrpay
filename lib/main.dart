@@ -6,6 +6,7 @@ import 'package:qrcode_pay/pages/home/outlet.dart';
 import 'package:qrcode_pay/pages/home/outlet/pilih_makan.dart';
 import 'package:qrcode_pay/pages/home/top_up.dart';
 import 'package:qrcode_pay/pages/home/topup/qr_top_up.dart';
+import 'package:qrcode_pay/pages/home/verify/verify.dart';
 import 'package:qrcode_pay/pages/home/wahana.dart';
 import 'package:qrcode_pay/pages/home/wahana/jumlah_wahana.dart';
 import 'package:qrcode_pay/pages/sign_in.dart';
@@ -13,6 +14,7 @@ import 'package:qrcode_pay/providers/auth_provider.dart';
 import 'package:qrcode_pay/providers/balance_cek_provider.dart';
 import 'package:qrcode_pay/providers/outlet_provider.dart';
 import 'package:qrcode_pay/providers/top_up_provider.dart';
+import 'package:qrcode_pay/providers/verify_topup_provider.dart';
 
 void main() => runApp(const QrPay());
 
@@ -27,8 +29,10 @@ class QrPay extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => OutletProvider()),
         ChangeNotifierProvider(create: (context) => BalanceCekProvider()),
         ChangeNotifierProvider(create: (context) => TopUpProvider()),
+        ChangeNotifierProvider(create: (context) => VerifyTopupProvider()),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         routes: {
           // '/': (context) => const Test(),
           '/': (context) => const SignIn(),
@@ -41,6 +45,7 @@ class QrPay extends StatelessWidget {
           '/qr_topup': (context) => const QrTopUp(),
           '/jumlah_wahana': (context) => const JumlahWahana(),
           '/pilih_makan': (context) => const PilihMakan(),
+          '/verify_topup': (context) => const Verify(),
         },
       ),
     );

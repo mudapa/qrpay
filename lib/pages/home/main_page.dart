@@ -128,6 +128,14 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ],
                 ),
+                const SizedBox(height: 64),
+                CardContent(
+                  text: 'Verify Top up',
+                  gambar: 'assets/check.png',
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/verify_topup');
+                  },
+                ),
               ],
             ),
           ),
