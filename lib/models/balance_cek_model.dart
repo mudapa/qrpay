@@ -1,5 +1,3 @@
-import 'package:qrcode_pay/models/data_model.dart';
-
 class BalanceCekModel {
   int? id;
   int? balance;

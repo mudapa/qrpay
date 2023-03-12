@@ -12,6 +12,7 @@ import 'package:qrcode_pay/pages/sign_in.dart';
 import 'package:qrcode_pay/providers/auth_provider.dart';
 import 'package:qrcode_pay/providers/balance_cek_provider.dart';
 import 'package:qrcode_pay/providers/outlet_provider.dart';
+import 'package:qrcode_pay/providers/top_up_provider.dart';
 
 void main() => runApp(const QrPay());
 
@@ -25,6 +26,7 @@ class QrPay extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => AuthProvider()),
         ChangeNotifierProvider(create: (context) => OutletProvider()),
         ChangeNotifierProvider(create: (context) => BalanceCekProvider()),
+        ChangeNotifierProvider(create: (context) => TopUpProvider()),
       ],
       child: MaterialApp(
         routes: {

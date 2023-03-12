@@ -28,7 +28,7 @@ class OutletModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      'id': id.toString(),
       'name': name,
       'address': address,
       'phone': phone,

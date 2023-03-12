@@ -1,49 +1,75 @@
-import 'package:qrcode_pay/models/data_model.dart';
+class TopUp {
+  String userId;
+  String topUpAmount;
+  int topUpStatusId;
+  String updatedAt;
+  String createdAt;
+  int id;
+  String topUpCode;
 
-class TopUpModel {
-  int? userId;
-  int? topUpAmount;
-  int? topUpStatusId;
-  DateTime? createdAt;
-  DateTime? updatedAt;
-  int? id;
-  String? topUpCode;
-
-  TopUpModel({
-    this.userId,
-    this.topUpAmount,
-    this.topUpStatusId,
-    this.createdAt,
-    this.updatedAt,
-    this.id,
-    this.topUpCode,
+  TopUp({
+    required this.userId,
+    required this.topUpAmount,
+    required this.topUpStatusId,
+    required this.updatedAt,
+    required this.createdAt,
+    required this.id,
+    required this.topUpCode,
   });
 
-  factory TopUpModel.fromJson(Map<String, dynamic> json) {
-    return TopUpModel(
-      userId: json['userId'] ?? 0,
-      topUpAmount: json['topUpAmount'] ?? 0,
-      topUpStatusId: json['topUpStatusId'] ?? 0,
-      createdAt: json['createdAt'] != null
-          ? DateTime.parse(json['createdAt'])
-          : DateTime.now(),
-      updatedAt: json['updatedAt'] != null
-          ? DateTime.parse(json['updatedAt'])
-          : DateTime.now(),
+  factory TopUp.fromJson(Map<String, dynamic> json) {
+    return TopUp(
+      userId: json['user_id'] ?? "",
+      topUpAmount: json['topup_amount'] ?? "",
+      topUpStatusId: json['topup_status_id'] ?? 0,
+      updatedAt: json['updated_at'] ?? "",
+      createdAt: json['created_at'] ?? "",
       id: json['id'] ?? 0,
-      topUpCode: json['topUpCode'] ?? '',
+      topUpCode: json['topup_code'] ?? "",
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'userId': userId.toString(),
-      'topUpAmount': topUpAmount.toString(),
-      'topUpStatusId': topUpStatusId.toString(),
-      'createdAt': createdAt.toString(),
-      'updatedAt': updatedAt.toString(),
-      'id': id.toString(),
-      'topUpCode': topUpCode.toString(),
+      'user_id': userId,
+      'topup_amount': topUpAmount,
+      'topup_status_id': topUpStatusId,
+      'updated_at': updatedAt,
+      'created_at': createdAt,
+      'id': id,
+      'topup_code': topUpCode,
+    };
+  }
+}
+
+class TopUpModel {
+  String message;
+  TopUp topup;
+  String path;
+  String topupCode;
+
+  TopUpModel({
+    required this.message,
+    required this.topup,
+    required this.path,
+    required this.topupCode,
+  });
+
+  factory TopUpModel.fromJson(Map<String, dynamic> json) {
+    return TopUpModel(
+      message: json['message'] ?? "",
+      topup: TopUp.fromJson(json['topup'] ?? {}),
+      path: json['path'] ?? "",
+      topupCode: json['topup_code'] ?? "",
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'message': message,
+      'topup': topup.toJson(),
+      'path': path,
+      'topup_code': topupCode,
     };
   }
 }
