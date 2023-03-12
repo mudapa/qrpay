@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qrcode_pay/models/data_model.dart';
 import 'package:qrcode_pay/providers/auth_provider.dart';
 import 'package:qrcode_pay/providers/balance_cek_provider.dart';
 import 'package:qrcode_pay/widgets/button/custom_button.dart';

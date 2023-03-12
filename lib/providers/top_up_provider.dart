@@ -19,7 +19,7 @@ class TopUpProvider with ChangeNotifier {
     required String topupAmount,
   }) async {
     try {
-      TopUpModel topUp = await TopUpService().TopupBalance(
+      TopUpModel topUp = await TopUpService().topupBalance(
         userId: userId,
         topupAmount: topupAmount,
       );

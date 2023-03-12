@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qrcode_pay/models/verify_topup_model.dart';
 import 'package:qrcode_pay/providers/verify_topup_provider.dart';
 import 'package:simple_barcode_scanner/simple_barcode_scanner.dart';
 

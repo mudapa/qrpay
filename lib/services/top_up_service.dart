@@ -7,7 +7,7 @@ class TopUpService {
   String baseUrl = 'http://192.168.3.162:8000/api';
 
   // Note: TopUp
-  Future<TopUpModel> TopupBalance({
+  Future<TopUpModel> topupBalance({
     required String userId,
     required String topupAmount,
   }) async {
