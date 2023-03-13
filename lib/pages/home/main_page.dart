@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:qrcode_pay/models/balance_cek_model.dart';
 import 'package:qrcode_pay/providers/balance_cek_provider.dart';
 import 'package:qrcode_pay/providers/outlet_provider.dart';
+import 'package:qrcode_pay/providers/wahana_provider.dart';
 import 'package:qrcode_pay/widgets/card/card_content.dart';
 import 'package:qrcode_pay/widgets/theme.dart';
 
@@ -34,6 +35,16 @@ class _MainPageState extends State<MainPage> {
       print(success);
       if (success) {
         Navigator.pushNamed(context, '/outlet');
+      }
+    }
+
+    // Wahana wahanaProvider
+    WahanaProvider wahanaProvider = Provider.of<WahanaProvider>(context);
+    wahanaIn() async {
+      bool success = await wahanaProvider.getWahanas();
+      print(success);
+      if (success) {
+        Navigator.pushNamed(context, '/wahana');
       }
     }
 
@@ -133,9 +144,7 @@ class _MainPageState extends State<MainPage> {
                       CardContent(
                         text: 'Wahana',
                         gambar: 'assets/carousel.png',
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/wahana');
-                        },
+                        onPressed: wahanaIn,
                       ),
                     ],
                   ),

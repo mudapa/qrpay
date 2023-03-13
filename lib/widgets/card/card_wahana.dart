@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:qrcode_pay/models/wahana_model.dart';
 import 'package:qrcode_pay/widgets/theme.dart';
 
 class CardWahana extends StatelessWidget {
-  final String name;
+  final WahanaModel wahana;
   final GestureTapCallback? onTap;
-  const CardWahana({
+  const CardWahana(
+    this.wahana, {
     Key? key,
-    required this.name,
     this.onTap,
   }) : super(key: key);
 
@@ -50,13 +51,13 @@ class CardWahana extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        name,
+                        wahana.name!,
                         style: primaryTextStyle.copyWith(
                           fontWeight: semibold,
                         ),
                       ),
                       Text(
-                        'Rp 10.000',
+                        'Rp ${wahana.price}',
                         style: priceTextStyle,
                       ),
                     ],

@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:qrcode_pay/models/wahana_model.dart';
+import 'package:qrcode_pay/providers/wahana_provider.dart';
 import 'package:qrcode_pay/widgets/card/card_wahana.dart';
 import 'package:qrcode_pay/widgets/theme.dart';
 
 class Wahana extends StatelessWidget {
-  const Wahana({Key? key}) : super(key: key);
+  const Wahana({
+    Key? key,
+    required WahanaModel wahana,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    WahanaProvider wahanaProvider = Provider.of<WahanaProvider>(context);
     Widget content() {
       return ListView(
         padding: EdgeInsets.only(
@@ -14,16 +21,11 @@ class Wahana extends StatelessWidget {
           left: defaultMargin,
           right: defaultMargin,
         ),
-        children: [
-          CardWahana(
-            name: 'Wahana A',
-            onTap: () {
-              Navigator.pushNamed(context, '/jumlah_wahana');
-            },
-          ),
-          const CardWahana(name: 'Wahana B'),
-          const CardWahana(name: 'Wahana C'),
-        ],
+        children: wahanaProvider.wahanas
+            .map(
+              (wahana) => CardWahana(wahana),
+            )
+            .toList(),
       );
     }
 

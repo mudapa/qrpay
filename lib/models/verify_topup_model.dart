@@ -55,8 +55,8 @@ class VerifyTopupModel {
 
   factory VerifyTopupModel.fromJson(Map<String, dynamic> json) {
     return VerifyTopupModel(
-      message: json['message'],
-      topup: TopUp.fromJson(json['topup']),
+      message: json['message'] as String,
+      topup: TopUp.fromJson(json['topup'] ?? {}),
     );
   }
 
