@@ -32,7 +32,7 @@ class VerifyTopupService {
     print(token);
     print(response.body);
 
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       VerifyTopupModel verifyTopup = VerifyTopupModel.fromJson(data['topup']);
 

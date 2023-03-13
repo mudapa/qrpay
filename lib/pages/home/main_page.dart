@@ -14,6 +14,8 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
   @override
   Widget build(BuildContext context) {
     // User authProvider
@@ -74,71 +76,82 @@ class _MainPageState extends State<MainPage> {
     }
 
     Widget content() {
-      return ListView(
-        children: [
-          header(),
-          Container(
-            margin: EdgeInsets.only(
-              top: 64,
-              left: defaultMargin,
-              right: defaultMargin,
-            ),
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(
-                    bottom: 64,
-                    left: defaultMargin,
-                    right: defaultMargin,
-                  ),
-                  child: Column(
-                    children: [
-                      Text(
-                        'Saldo Anda : Rp. ${balanceCek.balance}',
-                        style: primaryTextStyle.copyWith(
-                          fontSize: 24,
-                          fontWeight: semibold,
+      return RefreshIndicator(
+        key: _refreshIndicatorKey,
+        onRefresh: () {
+          // Implementasikan logika refresh di sini
+          return Future.delayed(const Duration(seconds: 2), () {
+            setState(() {
+              balanceCekProvider.cekBalance();
+            });
+          });
+        },
+        child: ListView(
+          children: [
+            header(),
+            Container(
+              margin: EdgeInsets.only(
+                top: 64,
+                left: defaultMargin,
+                right: defaultMargin,
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(
+                      bottom: 64,
+                      left: defaultMargin,
+                      right: defaultMargin,
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Saldo Anda : Rp. ${balanceCek.balance}',
+                          style: primaryTextStyle.copyWith(
+                            fontSize: 24,
+                            fontWeight: semibold,
+                          ),
                         ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      CardContent(
+                        text: 'Top Up',
+                        gambar: 'assets/button_add.png',
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/top_up');
+                        },
+                      ),
+                      CardContent(
+                        text: 'Outlet',
+                        gambar: 'assets/store.png',
+                        onPressed: outletIn,
+                      ),
+                      CardContent(
+                        text: 'Wahana',
+                        gambar: 'assets/carousel.png',
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/wahana');
+                        },
                       ),
                     ],
                   ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    CardContent(
-                      text: 'Top Up',
-                      gambar: 'assets/button_add.png',
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/top_up');
-                      },
-                    ),
-                    CardContent(
-                      text: 'Outlet',
-                      gambar: 'assets/store.png',
-                      onPressed: outletIn,
-                    ),
-                    CardContent(
-                      text: 'Wahana',
-                      gambar: 'assets/carousel.png',
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/wahana');
-                      },
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 64),
-                CardContent(
-                  text: 'Verify Top up',
-                  gambar: 'assets/check.png',
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/verify_topup');
-                  },
-                ),
-              ],
+                  const SizedBox(height: 64),
+                  CardContent(
+                    text: 'Verify Top up',
+                    gambar: 'assets/check.png',
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/verify_topup');
+                    },
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       );
     }
 
