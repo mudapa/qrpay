@@ -13,11 +13,52 @@ class WahanaProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  late TransactionWahanaModel _transactionWahana;
+
+  TransactionWahanaModel get transactionWahana => _transactionWahana;
+
+  // TransactionWahana set
+  set transactionWahana(TransactionWahanaModel transactionWahana) {
+    _transactionWahana = transactionWahana;
+    notifyListeners();
+  }
+
   // Note: GetWahanas
   Future<bool> getWahanas() async {
     try {
       List<WahanaModel> wahanas = await WahanaService().getWahanas();
       _wahanas = wahanas;
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  // Note: GetWahanaId
+  Future<bool> getWahanaId() async {
+    try {
+      WahanaModel wahanas = await WahanaService().getWahanaId();
+      _wahanas = [wahanas];
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  // Note: Transaction Wahana
+  Future<bool> payPlayground({
+    required String playgroundId,
+    required String userId,
+  }) async {
+    try {
+      TransactionWahanaModel transactionWahana =
+          await WahanaService().payPlayground(
+        playgroundId: playgroundId,
+        userId: userId,
+      );
+      _transactionWahana = transactionWahana;
       return true;
     } catch (e) {
       print(e);

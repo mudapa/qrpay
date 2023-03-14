@@ -9,7 +9,7 @@ import 'package:qrcode_pay/pages/home/top_up.dart';
 import 'package:qrcode_pay/pages/home/topup/qr_top_up.dart';
 import 'package:qrcode_pay/pages/home/verify/verify.dart';
 import 'package:qrcode_pay/pages/home/wahana.dart';
-import 'package:qrcode_pay/pages/home/wahana/jumlah_wahana.dart';
+import 'package:qrcode_pay/pages/home/wahana/detail_wahana.dart';
 import 'package:qrcode_pay/pages/sign_in.dart';
 import 'package:qrcode_pay/providers/auth_provider.dart';
 import 'package:qrcode_pay/providers/balance_cek_provider.dart';
@@ -47,7 +47,7 @@ class QrPay extends StatelessWidget {
                 wahana: WahanaModel(),
               ),
           '/qr_topup': (context) => const QrTopUp(),
-          '/jumlah_wahana': (context) => const JumlahWahana(),
+          '/detail_wahana': (context) => const DetailWahana(),
           '/pilih_makan': (context) => const PilihMakan(),
           '/verify_topup': (context) => const Verify(),
         },

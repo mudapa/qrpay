@@ -1,23 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:qrcode_pay/models/wahana_model.dart';
+import 'package:qrcode_pay/providers/wahana_provider.dart';
 import 'package:qrcode_pay/widgets/theme.dart';
 
 class CardWahana extends StatelessWidget {
   final WahanaModel wahana;
-  final GestureTapCallback? onTap;
   const CardWahana(
     this.wahana, {
     Key? key,
-    this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    WahanaProvider wahanaProvider = Provider.of<WahanaProvider>(context);
+    wahanaId() async {
+      bool success = await wahanaProvider.getWahanaId();
+      print(success);
+      if (success) {
+        Navigator.pushNamed(context, '/detail_wahana');
+      }
+    }
+
     return GestureDetector(
-      onTap: onTap,
+      onTap: wahanaId,
       child: Container(
         margin: EdgeInsets.only(
-          top: defaultMargin,
+          bottom: defaultMargin,
         ),
         padding: const EdgeInsets.symmetric(
           horizontal: 20,
