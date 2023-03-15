@@ -37,4 +37,35 @@ class OutletService {
       throw Exception('Gagal Get Outlet!');
     }
   }
+
+  // Note: Product
+  Future<List<AllProductModel>> getProducts() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token') ?? "";
+    var urlProduct = '$baseUrl/products';
+    var headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': 'Bearer $token',
+    };
+    var response = await http.get(
+      Uri.parse(urlProduct),
+      headers: headers,
+    );
+
+    print(response.body);
+
+    if (response.statusCode == 200) {
+      List data = jsonDecode(response.body)['data'];
+      List<AllProductModel> products = [];
+
+      for (var item in data) {
+        products.add(AllProductModel.fromJson(item));
+      }
+
+      return products;
+    } else {
+      throw Exception('Gagal Get Product!');
+    }
+  }
 }

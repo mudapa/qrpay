@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:qrcode_pay/models/outlet_model.dart';
+import 'package:qrcode_pay/providers/outlet_provider.dart';
 import 'package:qrcode_pay/widgets/theme.dart';
 
 class CardOutlet extends StatelessWidget {
@@ -8,8 +10,17 @@ class CardOutlet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    OutletProvider outletProvider = Provider.of<OutletProvider>(context);
+    productGet() async {
+      bool success = await outletProvider.getProducts();
+      print(success);
+      if (success) {
+        Navigator.pushNamed(context, '/product');
+      }
+    }
+
     return GestureDetector(
-      onTap: () {},
+      onTap: productGet,
       child: Container(
         margin: EdgeInsets.only(
           top: defaultMargin,

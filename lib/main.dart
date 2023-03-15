@@ -4,7 +4,7 @@ import 'package:qrcode_pay/models/outlet_model.dart';
 import 'package:qrcode_pay/models/wahana_model.dart';
 import 'package:qrcode_pay/pages/home/main_page.dart';
 import 'package:qrcode_pay/pages/home/outlet.dart';
-import 'package:qrcode_pay/pages/home/outlet/pilih_makan.dart';
+import 'package:qrcode_pay/pages/home/outlet/product.dart';
 import 'package:qrcode_pay/pages/home/top_up.dart';
 import 'package:qrcode_pay/pages/home/topup/qr_top_up.dart';
 import 'package:qrcode_pay/pages/home/verify/verify.dart';
@@ -48,7 +48,7 @@ class QrPay extends StatelessWidget {
               ),
           '/qr_topup': (context) => const QrTopUp(),
           '/detail_wahana': (context) => const DetailWahana(),
-          '/pilih_makan': (context) => const PilihMakan(),
+          '/product': (context) => const Product(),
           '/verify_topup': (context) => const Verify(),
         },
       ),

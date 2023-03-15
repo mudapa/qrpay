@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:qrcode_pay/models/outlet_model.dart';
 import 'package:qrcode_pay/widgets/theme.dart';
 
-class CardMakan extends StatelessWidget {
-  final String name;
+class CardProduct extends StatelessWidget {
+  final AllProductModel product;
   final GestureTapCallback? onTap;
-  const CardMakan({
+  const CardProduct(
+    this.product, {
     Key? key,
-    required this.name,
     this.onTap,
   }) : super(key: key);
 
@@ -50,13 +51,13 @@ class CardMakan extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        name,
+                        product.name,
                         style: primaryTextStyle.copyWith(
                           fontWeight: semibold,
                         ),
                       ),
                       Text(
-                        'Lorem Ipsum',
+                        'Rp. ${product.price.toString()}',
                         style: blackTextStyle,
                       ),
                     ],
